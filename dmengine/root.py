@@ -13,10 +13,8 @@ def getoutput():
         if len(outlist)>1 and outlist[0].find('dmengine/')>=0:
             change_file_list.append(outlist[0].strip())
             print change_file_list
-#         else:
-#             print len(out.split('|'))
-#             print out.split('|')
-        
+    if p.poll() is None:
+        p.kill()    
     print p.returncode
 
 getoutput()
