@@ -1,11 +1,9 @@
-import subprocess
-
-def getoutput():
+f getoutput():
     change_file_list=[]
     p = subprocess.Popen('git pull',stdout=subprocess.PIPE,shell=True)
     while p.poll() is None:
         out=''
-        out=p.stdout.readline().strip('\n')
+        out=p.stdout.readline().strip('\n').strip()
         print out
         if out.find('Already up-to-date.')>=0:
             break;
@@ -18,14 +16,13 @@ def getoutput():
             
         if out.find('rename')>=0:
             print 'file be renamed'
-            s1=out.split(' ')[-1]
+            s1=out.split(' ')[1]
+            s2=out.split(' ')[3]
             pre=s1[0:s1.find('{')]
             print pre
-            print s1[s1.find('{'):s1.find('}')]
-            print s1[s1.find('{'):s1.find('}')].split('=>')
-            oldname=s1[s1.find('{'):s1.find('}')].split('=>')[0]
+            oldname=s1[s1.find('{'):].replace('{','')
             print oldname
-            newname=s1[s1.find('{'):s1.find('}')].split('=>')[1]
+            newname=s2.replace('}','')
             print newname
             print pre+oldname
             print pre+newname
