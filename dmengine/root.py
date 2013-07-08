@@ -1,4 +1,4 @@
-f getoutput():
+def getoutput():
     change_file_list=[]
     p = subprocess.Popen('git pull',stdout=subprocess.PIPE,shell=True)
     while p.poll() is None:
